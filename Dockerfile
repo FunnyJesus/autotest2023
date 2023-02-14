@@ -1,14 +1,10 @@
-FROM --platform=linux/amd64 python:3.9
+FROM python:3.9
 
 RUN set -x \
    && apt update \
    && apt upgrade -y \
    && apt install -y \
        firefox-esr
-
-RUN pip install \
-       requests \
-       selenium
 
 ENV GECKODRIVER_VER v0.30.0
 ENV FIREFOX_VER 96.0
@@ -27,6 +23,9 @@ RUN set -x \
    && tar zxf geckodriver-*.tar.gz \
    && mv geckodriver /usr/bin/
 
+RUN pip install \
+        requests \
+        selenium
 
 COPY test_test_1.py app.py
 
